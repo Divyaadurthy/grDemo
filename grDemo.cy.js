@@ -1,8 +1,11 @@
 describe('This is a GR Demo tests', () => {
   it('End to end guestresevation flow Invalid card Number Test', () => {
+    // navigating for google.com
     cy.visit('https://www.google.com/');
     cy.get('.SDkEP').type('bellagio hotel las vegas').click();
     cy.wait(30000);
+
+    //navigating to guestresevation cross domain
 
     cy.origin('https://www.guestreservations.com/', () => {
       cy.visit('bellagio-las-vegas/booking?');
@@ -17,6 +20,8 @@ describe('This is a GR Demo tests', () => {
       ).click();
 
       cy.wait(3000);
+
+      //Guest info
 
       cy.get('[placeholder="First Name"]').type('Divya Adurthy');
       cy.get('[placeholder="Last Name"]').type(' Adurthy');
@@ -47,9 +52,12 @@ describe('This is a GR Demo tests', () => {
       cy.wait(4000).contains('2026').click();
 
       cy.get(':nth-child(4) > .btn').click();
+
+     // cy.get('.btn btn-warning').contains('COMPLETE RESERVATION').click();
       cy.wait(2000);
 
-  
+      // Toast message validation
+
       cy.on('window:alert', (txt) => {
         expect(txt).to.contains('Credit card is declined.');
       });
@@ -66,14 +74,20 @@ describe('This is a GR Demo tests', () => {
 
       cy.wait(3000);
 
+      // Find Rooms & wait
+
       cy.contains('Find Rooms').click();
       cy.wait(30000);
+
+      //Book Rooms
 
       cy.get(
         ':nth-child(1) > .room-info > .body > .room-items > .room-item > .horizontal-flex > .info > .bg-block > .btn'
       ).click();
 
       cy.wait(3000);
+
+      // Guest info
 
       cy.get('[placeholder="First Name"]').type('Divya Adurthy');
       cy.get('[placeholder="Last Name"]').type(' Adurthy');
@@ -115,10 +129,7 @@ describe('This is a GR Demo tests', () => {
 
       cy.wait(3000);
 
-      //cy.get('div h4').find('Email is invalid. Please ensure your email address is accurate, or try a different one.')
-      //.should('have.text','Email is invalid.')
-
-      // cy.get('h4#headingText').find('Email is invalid.').should("be.visible");
+      // Toast message validation
 
       cy.on('window:alert', (txt) => {
         expect(txt).to.contains('Email is invalid');
