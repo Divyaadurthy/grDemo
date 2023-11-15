@@ -120,6 +120,8 @@ describe('This is a GR Demo tests', () => {
 
       cy.get(':nth-child(4) > .btn').click();
 
+      //longer wait because of cross-domain 
+      
       cy.wait(30000);
 
       cy.get('[type="email"]').clear();
